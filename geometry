@@ -1,0 +1,91 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define fi first
+#define se second
+#define pb push_back
+#define eb emplace_back
+#define ll long long
+#define ld long double
+#define nmax 5007
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+void faster()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+}
+
+int getrand(const int& mi, const int& ma)
+{
+    return rng() % (ma - mi + 1) + mi;
+}
+
+bool minimize(int& x, const int& y)
+{
+    if(x > y)
+    {
+        x = y;
+        return true;
+    }
+    return false;
+}
+
+bool maximize(int& x, const int& y)
+{
+    if(x < y)
+    {
+        x = y;
+        return true;
+    }
+    return false;
+}
+
+struct Tpoint
+{
+    ll x, y;
+    Tpoint(){};
+    Tpoint(const ll& _x, const ll& _y)
+    {
+        x = _x, y = _y;
+    }
+};
+
+using Tvector = Tpoint;
+
+ld len(const Tvector& u)
+{   
+    return sqrt(u.x * u.x + u.y * u.y);
+}
+
+ll sqrlen(const Tvector& u)
+{
+    return u.x * u.x + u.y * u.y;
+}
+
+Tvector operator +(const Tvector& u, const Tvector& v)
+{
+    return {u.x + v.x, u.y + v.y};
+}
+
+Tvector operator -(const Tvector& u, const Tvector& v)
+{
+    return {u.x - v.x, u.y - v.y};
+}
+
+ll operator %(const Tvector& u, const Tvector& v)
+{
+    return u.x * v.x + u.y * v.y;
+}
+
+ll operator *(const Tvector& u, const Tvector& v)
+{
+    return u.x * v.y - u.y * v.x;
+}
+
+int CCW(const Tpoint& a, const Tpoint& b, const Tpoint& c)
+{
+    ll tp = (b - a) * (c - b);
+    if(tp > 0) return 1; // re trai
+    if(tp < 0) return -1; // re phai
+    return 0; // thang hang
+}
